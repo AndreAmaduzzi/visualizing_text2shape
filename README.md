@@ -30,6 +30,8 @@ pip install wordcloud
 
 ## First visualization: renderings of 3D shapes with corresponding text
 ### Generation of the rendered views
+The rendered views are captured from a virtual camera which is rotating around the 3D shape. We can specify the number of views to capture. The rendering pipeline will make sure to cover the whole range of 360 degress around the object.
+
 To generate the rendered views for all the shapes of the dataset:
 ```console
 python render_shapenet_obj.py --category all --views <views_per_shape>
@@ -57,9 +59,13 @@ Once obtained all renderings, we can plot the views for a specific shape and the
 python plot_renderings.py 
 --obj_path <path to .obj file of the 3D shape>
 ```
-The output figure will we saved in the folder specified by the argument *output_folder*, being by default ***output_plots/***.
 
-![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/output_renderings.png)
+The output figure will we saved in the folder specified by the argument *output_folder*, being by default ***output_plots/***.
+The code is able to automatically adjust the positioning and size of the views, according to their number (if 20, 10, 5...).
+Below, we report the figure with 20 views and with 10 views.
+![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/output_renderings_20.png)
+![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/output_renderings_10.png)
+
 
 ## Second visualization: word clouds
 This visualization provides an understanding of the frequency with which different words appear in the textual descriptions of Text2Shape. 
