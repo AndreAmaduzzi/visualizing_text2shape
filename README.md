@@ -66,6 +66,21 @@ Below, we report the figure with 20 views and with 10 views.
 ![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/output_renderings_20.png)
 ![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/output_renderings_10.png)
 
+### Plot of the animation of the rotating 3D shape
+Instead of generating the single rendered views, the code of this repository allows to get also an animation of the 3D object rotating around its vertical axis, to allow a comprehensive view of all its sides.
+```console
+python plot_renderings.py 
+--obj_path <path to .obj file of the 3D shape>
+--animation
+```
+
+We can also specify the number of frames of the video, through the argument *frames*.
+
+> REMARK: unlike the previous figure, this animation does not show also the textual descriptions of the object.
+
+Below, we can see an example of such animation.
+![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/animation.fig)
+
 
 ## Second visualization: word clouds
 This visualization provides an understanding of the frequency with which different words appear in the textual descriptions of Text2Shape. 
