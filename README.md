@@ -25,7 +25,7 @@ Install the required libraries: BLENDER Python API [bpy](https://docs.blender.or
 ```console
 pip install bpy
 pip install open3d
-pip install 
+pip install wordcloud
 ```
 
 ## First visualization: renderings of 3D shapes with corresponding text
@@ -36,13 +36,13 @@ python render_shapenet_obj.py --category all --views <views_per_shape>
 ```
 
 
-To generate the rendered views for the shapes belonging to a single category (e.g. chairs or tables)
+To generate the rendered views for the shapes belonging to a single category (e.g. chairs or tables):
 ```console
 python render_shapenet_obj.py --category Chair --views <views_per_shape>
 ```
 
 
-To generate the rendered views for the shape provided as example in this repository
+To generate the rendered views for the shape provided as example in this repository:
 ```console
 python render_shapenet_obj.py 
 --obj_path input_examples/a682c4bf731e3af2ca6a405498436716.obj 
@@ -62,3 +62,16 @@ The output figure will we saved in the folder specified by the argument *output_
 ![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/output_renderings.png)
 
 ## Second visualization: word clouds
+This visualization provides an understanding of the frequency with which different words appear in the textual descriptions of Text2Shape. 
+To plot a wordcloud for the whole dataset:
+```console
+python plot_text.py
+```
+
+To plot a wordclous for a specific category of the dataset, such as chairs:
+```console
+python plot_text.py --category Chair
+```
+
+The resulting figure will be saved in the folder specified by the argument *output_folder*, being by default ***output_plots/***.
+![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/worcloud_all.png)
