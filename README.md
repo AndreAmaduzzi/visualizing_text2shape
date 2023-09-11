@@ -30,7 +30,35 @@ pip install
 
 ## First visualization: renderings of 3D shapes with corresponding text
 ### Generation of the rendered views
-### Plot of the rendered views, with text prompts
+To generate the rendered views for all the shapes of the dataset:
+```console
+python render_shapenet_obj.py --category all --views <views_per_shape>
+```
 
+
+To generate the rendered views for the shapes belonging to a single category (e.g. chairs or tables)
+```console
+python render_shapenet_obj.py --category Chair --views <views_per_shape>
+```
+
+
+To generate the rendered views for the shape provided as example in this repository
+```console
+python render_shapenet_obj.py 
+--obj_path input_examples/a682c4bf731e3af2ca6a405498436716.obj 
+--views <views_per_shape>
+```
+
+The resulting renderings will be saved in the folder specified by the argument *output_folder*, being by default ***output_renders/***.
+
+### Plot of the rendered views, with text prompts
+Once obtained all renderings, we can plot the views for a specific shape and the corresponding textual descriptions.
+```console
+python plot_renderings.py 
+--obj_path <path to .obj file of the 3D shape>
+```
+The output figure will we saved in the folder specified by the argument *output_folder*, being by default ***output_plots/***.
+
+![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/output_renderings.png)
 
 ## Second visualization: word clouds
