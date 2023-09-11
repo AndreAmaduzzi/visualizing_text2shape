@@ -29,5 +29,8 @@ pip install
 ```
 
 ## First visualization: renderings of 3D shapes with corresponding text
+### Generation of the rendered views
+### Plot of the rendered views, with text prompts
+
 
 ## Second visualization: word clouds
