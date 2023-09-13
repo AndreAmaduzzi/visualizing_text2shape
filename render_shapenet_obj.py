@@ -212,11 +212,18 @@ def main():
     if args.obj_path is not None:
         paths = [args.obj_path]
     else:
-        # Iterate over all the paths of the models
-        root_directory = os.path.join(args.data_root, class_to_class_id[args.category])
-        paths = get_obj_paths(root_directory) 
+        if args.category=='all':
+            categories = ['Table', 'Chair']
+            paths = []
+            for category in categories:
+                # Iterate over all the paths of the models
+                root_directory = os.path.join(args.data_root, class_to_class_id[category])
+                paths += get_obj_paths(root_directory) 
+        else:
+            root_directory = os.path.join(args.data_root, class_to_class_id[args.category])
+            paths = get_obj_paths(root_directory)             
     
-    print('paths: ', paths)
+    print('paths: ', len(paths))
     count = 0
     for path in paths:
         count +=1
