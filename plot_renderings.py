@@ -68,7 +68,7 @@ def parse_args():
     parser.add_argument('--csv_path', type=str, default='input_examples/captions.tablechair.csv',
                         help='path to CSV file with textual descriptions')
     
-    parser.add_argument('--obj_path', type=str, default='',
+    parser.add_argument('--obj_path', type=str, default='', required=True,
                         help='path to OBJ file of the 3D shape')
     
     parser.add_argument('--renders_folder', type=str, default='output_renders/',
