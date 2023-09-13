@@ -43,11 +43,10 @@ To generate the rendered views for the shapes belonging to a single category (e.
 python render_shapenet_obj.py --category Chair --views <views_per_shape>
 ```
 
-
 To generate the rendered views for the shape provided as example in this repository:
 ```console
 python render_shapenet_obj.py 
---obj_path input_examples/a682c4bf731e3af2ca6a405498436716.obj 
+--obj_path input_examples/chair/a682c4bf731e3af2ca6a405498436716.obj 
 --views <views_per_shape>
 ```
 
@@ -58,6 +57,12 @@ Once obtained all renderings, we can plot the views for a specific shape and the
 ```console
 python plot_renderings.py 
 --obj_path <path to .obj file of the 3D shape>
+```
+
+For the example in this repository:
+```console
+python plot_renderings.py 
+--obj_path input_examples/chair/a682c4bf731e3af2ca6a405498436716.obj
 ```
 
 The output figure will we saved in the folder specified by the argument *output_folder*, being by default ***output_plots/***.
@@ -79,7 +84,7 @@ We can also specify the number of frames of the video, through the argument *fra
 > REMARK: unlike the previous figure, this animation does not show also the textual descriptions of the object.
 
 Below, we can see an example of such animation.
-![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/animation.fig)
+![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/animation.gif)
 
 
 ## Second visualization: word clouds
@@ -95,4 +100,4 @@ python plot_text.py --category Chair
 ```
 
 The resulting figure will be saved in the folder specified by the argument *output_folder*, being by default ***output_plots/***.
-![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/worcloud_all.png)
+![alt text](https://raw.githubusercontent.com/AndreAmaduzzi/visualizing_text2shape/main/output_examples/worcloud_All.png)
