@@ -66,11 +66,16 @@ def get_obj_paths(root_directory):
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Renders given obj file by rotation a camera around it.')
+
+    parser.add_argument('--animation', action="store_true", help='if set, the output of this script will be an AVI video of the rotating 3D shape')
+
+    parser.add_argument('--frames', type=int, default=400, help='the number of frames of the animation')
+
     parser.add_argument('--views', type=int, default=20,
                         help='number of views to be rendered')
     parser.add_argument('--data_root', type=str, default='/media/data2/aamaduzzi/datasets/ShapeNetCore.v2',
                         help='The path to the dataset folder')
-    parser.add_argument('--category', type=str, default='chair',
+    parser.add_argument('--category', type=str, default='Chair', choices=["Chair", "Table", "all"],
                         help='The name of the category of shapes to render.')
     parser.add_argument('--obj_path', type=str, default=None,
                         help='The path of the single .obj file to render')    
@@ -303,24 +308,41 @@ def main():
             fp = os.path.join(os.path.abspath(args.output_folder), class_identifier, model_identifier)
 
         print('model identifier: ', model_identifier)
-        for i in range(0, args.views):
-            print("Rotation {}, {}".format((stepsize * i), math.radians(stepsize * i)))
+        if args.animation:
+            obj.rotation_mode = 'XYZ'
+            scene.frame_start = 1
+            scene.frame_end = args.frames
+            obj.rotation_euler = (math.radians(90), 0, 0)
+            obj.keyframe_insert('rotation_euler', index=-1 ,frame=scene.frame_start)
+            obj.rotation_euler = (math.radians(90), 0, math.radians(360))
+            obj.keyframe_insert('rotation_euler', index=-1 ,frame=scene.frame_end)
 
-            render_file_path = os.path.join(fp, model_identifier + '_r_{0:03d}'.format(int(i * stepsize)))
-
+            render_file_path = os.path.join(fp, model_identifier)
             scene.render.filepath = render_file_path
-            print('render file path: ', render_file_path)
-            #depth_file_output.file_slots[0].path = render_file_path + "_depth"
-            #normal_file_output.file_slots[0].path = render_file_path + "_normal"
-            #albedo_file_output.file_slots[0].path = render_file_path + "_albedo"
-            #id_file_output.file_slots[0].path = render_file_path + "_id"
+            scene.render.image_settings.file_format = "AVI_JPEG"
+            scene.render.film_transparent = True
+            bpy.ops.render.render(write_still=False, animation=True)
+        else:
+            for i in range(0, args.views):
+                print("Rotation {}, {}".format((stepsize * i), math.radians(stepsize * i)))
 
-            print('rendering...')
-            bpy.ops.render.render(write_still=True)  # render still
-            print('save')
-            bpy.ops.wm.save_mainfile()
+                render_file_path = os.path.join(fp, model_identifier + '_r_{0:03d}'.format(int(i * stepsize)))
 
-            cam_empty.rotation_euler[2] += math.radians(stepsize)
+                scene.render.filepath = render_file_path
+                print('render file path: ', render_file_path)
+                
+                # Uncomment to get depth, normal, albedo, id
+                #depth_file_output.file_slots[0].path = render_file_path + "_depth"
+                #normal_file_output.file_slots[0].path = render_file_path + "_normal"
+                #albedo_file_output.file_slots[0].path = render_file_path + "_albedo"
+                #id_file_output.file_slots[0].path = render_file_path + "_id"
+
+                print('rendering...')
+                bpy.ops.render.render(write_still=True)  # render still
+                print('save')
+                bpy.ops.wm.save_mainfile()
+
+                cam_empty.rotation_euler[2] += math.radians(stepsize)
         
         # Delete the current mesh from the scene
         for obj in bpy.context.scene.objects:
@@ -333,8 +355,6 @@ def main():
         
         # For debugging the workflow
         #bpy.ops.wm.save_as_mainfile(filepath='debug.blend')
-        if count == 2:
-            break
 
 if __name__ == "__main__":
     main()
