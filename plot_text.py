@@ -16,7 +16,7 @@ def parse_args():
     parser.add_argument('--csv_path', type=str, default='input_examples/captions.tablechair.csv',
                         help='path to CSV file with textual descriptions')
     
-    parser.add_argument('--category', type=str, default='all', choices=['Chair', 'Table', 'all'],
+    parser.add_argument('--category', type=str, default='all', choices=['Chair', 'Table', 'All'],
                         help='category of shapes to be analyzed')
    
     parser.add_argument('--output_folder', type=str, default='output_plots/',
