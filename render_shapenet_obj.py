@@ -68,33 +68,45 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Renders given obj file by rotation a camera around it.')
 
     parser.add_argument('--animation', action="store_true", help='if set, the output of this script will be an AVI video of the rotating 3D shape')
-
+    
     parser.add_argument('--frames', type=int, default=400, help='the number of frames of the animation')
-
+    
     parser.add_argument('--views', type=int, default=20,
                         help='number of views to be rendered')
+    
     parser.add_argument('--data_root', type=str, default='/media/data2/aamaduzzi/datasets/ShapeNetCore.v2',
                         help='The path to the dataset folder')
+    
     parser.add_argument('--category', type=str, default='Chair', choices=["Chair", "Table", "all"],
                         help='The name of the category of shapes to render.')
+    
     parser.add_argument('--obj_path', type=str, default=None,
                         help='The path of the single .obj file to render')    
+    
     parser.add_argument('--output_folder', type=str, default='./output_renders',
                         help='The path the output will be dumped to.')
+    
     parser.add_argument('--scale', type=float, default=1,
                         help='Scaling factor applied to model. Depends on size of mesh.')
+    
     parser.add_argument('--remove_doubles', type=bool, default=True,
                         help='Remove double vertices to improve mesh quality.')
+    
     parser.add_argument('--edge_split', type=bool, default=True,
                         help='Adds edge split filter.')
+    
     parser.add_argument('--depth_scale', type=float, default=1.4,
                         help='Scaling that is applied to depth. Depends on size of mesh. Try out various values until you get a good result. Ignored if format is OPEN_EXR.')
+    
     parser.add_argument('--color_depth', type=str, default='8',
                         help='Number of bit per channel used for output. Either 8 or 16.')
+    
     parser.add_argument('--format', type=str, default='PNG',
                         help='Format of files generated. Either PNG or OPEN_EXR')
+    
     parser.add_argument('--resolution', type=int, default=600,
                         help='Resolution of the images.')
+    
     parser.add_argument('--engine', type=str, default='CYCLES',
                         help='Blender internal engine for rendering. E.g. CYCLES, BLENDER_EEVEE, ...')
 
